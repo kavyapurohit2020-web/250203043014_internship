@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration Form</title>
+    <style>
+        body {
+             font-family: sans-serif;
+             margin: 40px; 
+             line-height: 1.6; 
+            }
+        form { max-width: 500px; background: #f9f9f9; padding: 20px; border-radius: 8px; }
+        div { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
+            width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+        }
+        button { background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h2>Join the Community</h2>
+    <form action="/submit-form-endpoint" method="POST">
+        
+        <!-- Text Input -->
+        <div>
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full_name" placeholder="John Doe" required>
+        </div>
+
+        <!-- Email Input -->
+        <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="user_email" required>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" name="password" required>
+        </div>
+
+        <!-- Dropdown (Select) -->
+        <div>
+            <label for="role">Primary Role</label>
+            <select id="role" name="user_role">
+                <option value="developer">Developer</option>
+                <option value="designer">Designer</option>
+                <option value="manager">Manager</option>
+            </select>
+        </div>
+
+        <!-- Radio Buttons (Choose one) -->
+        <div>
+            <label>Communication Preference</label>
+            <input type="radio" id="email-pref" name="contact" value="email" checked>
+            <label style="display:inline;" for="email-pref">Email</label>
+            <input type="radio" id="phone-pref" name="contact" value="phone">
+            <label style="display:inline;" for="phone-pref">Phone</label>
+        </div>
+
+        <!-- Checkbox (Choose multiple) -->
+        <div>
+            <input type="checkbox" id="terms" name="terms" required>
+            <label style="display:inline;" for="terms">I agree to the terms and conditions</label>
+        </div>
+
+        <!-- Textarea -->
+        <div>
+            <label for="bio">Short Bio</label>
+            <textarea id="bio" name="user_bio" rows="4"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Register Now</button>
+
+    </form>
+
+</body>
+</html>
