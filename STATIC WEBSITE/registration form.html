@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Registration Form</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#6a11cb,#2575fc,#ff6ec4,#7873f5);
+    background-size:400% 400%;
+    animation:bgAnimation 10s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes bgAnimation{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+.container{
+    width:420px;
+    padding:35px;
+    border-radius:20px;
+    backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.container h2{
+    text-align:center;
+    color:rgb(251, 250, 251);
+    margin-bottom:25px;
+    font-size:30px;
+    letter-spacing:1px;
+}
+
+.input-box{
+    margin-bottom:18px;
+    position:relative;
+}
+
+.input-box label{
+    color:rgb(139, 121, 121);
+    font-size:14px;
+    display:block;
+    margin-bottom:6px;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.input-box input:focus,
+.input-box select:focus{
+    transform:scale(1.03);
+    box-shadow:0 0 15px rgba(255,255,255,0.6);
+}
+
+.input-box input:hover,
+.input-box select:hover{
+    background:#f4f804;
+}
+
+.gender-box{
+    display:flex;
+    gap:20px;
+    color:white;
+    margin-top:5px;
+}
+
+.gender-box input{
+    margin-right:5px;
+}
+
+.resume-text{
+    color:#fa08e2;
+    font-size:12px;
+    margin-top:5px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#ff6ec4,#7873f5);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.4s;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+button:active{
+    transform:scale(0.98);
+}
+
+.login-link{
+    text-align:center;
+    margin-top:18px;
+    color:white;
+}
+
+.login-link a{
+    color:#ffe600;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.login-link a:hover{
+    color:#fff;
+    text-shadow:0 0 10px white;
+}
+
+.success{
+    text-align:center;
+    margin-top:15px;
+    color:#00ff88;
+    font-weight:bold;
+    animation:pop 0.5s ease;
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0.5);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Register Now</h2>
+
+    <form id="registerForm">
+
+        <div class="input-box">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="input-box">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-box">
+            <label>Create Password</label>
+            <input type="password" id="password" placeholder="Create password" required>
+        </div>
+
+        <div class="input-box">
+            <label>Date of Birth</label>
+            <input type="date" id="dob" required>
+        </div>
+
+        <div class="input-box">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter phone number" required>
+        </div>
+
+        <div class="input-box">
+            <label>Gender</label>
+
+            <div class="gender-box">
+                <label>
+                    <input type="radio" name="gender" required> Male
+                </label>
+
+                <label>
+                    <input type="radio" name="gender"> Female
+                </label>
+
+                <label>
+                    <input type="radio" name="gender"> Other
+                </label>
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label>Upload Resume (PDF Only)</label>
+            <input type="file" id="resume" accept=".pdf" required>
+            <div class="resume-text">
+                Only PDF files are accepted
+            </div>
+        </div>
+
+        <button type="submit">Create Account</button>
+
+        <div class="success" id="successMsg"></div>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="#">Login</a>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let password = document.getElementById("password").value;
+    let phone = document.getElementById("phone").value;
+    let resume = document.getElementById("resume").files[0];
+
+    if(password.length < 6){
+        alert("Password must be at least 6 characters long");
+        return;
+    }
+
+    if(phone.length != 10 || isNaN(phone)){
+        alert("Enter valid 10 digit phone number");
+        return;
+    }
+
+    if(resume){
+        let fileName = resume.name.toLowerCase();
+
+        if(!fileName.endsWith(".pdf")){
+            alert("Only PDF files are allowed!");
+            return;
+        }
+    }
+
+    document.getElementById("successMsg").innerHTML =
+    "Registration Successful ✨";
+
+});
+
+</script>
+
+</body>
+</html>
